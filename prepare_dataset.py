@@ -20,7 +20,7 @@ image_paths = ['dataset/yam/' + img for img in os.listdir('dataset/yam/')]
 train_paths, test_paths = train_test_split(image_paths, test_size=0.1, random_state=42)
 train_paths, val_paths = train_test_split(train_paths, test_size=0.2, random_state=42)
 
-preprocessed_folder = 'pre_processed_dataset/yam'
+preprocessed_folder = 'pre_processed_dataset/train/yam'
 os.makedirs(preprocessed_folder, exist_ok=True)
 
 for img_path in train_paths:

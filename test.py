@@ -6,7 +6,7 @@ from keras.models import load_model
 model = load_model('models/yam.h5')
 
 # Carregar uma nova imagem para teste
-imagem_teste = cv2.imread('../../../../../Pictures/aws/aws.png')
+imagem_teste = cv2.imread('inhame.jpg')
 
 # Redimensionar a imagem para o tamanho esperado pelo modelo (224x224 neste caso)
 imagem_teste_redimensionada = cv2.resize(imagem_teste, (224, 224))
