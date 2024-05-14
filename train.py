@@ -25,7 +25,7 @@ model.compile(optimizer='adam',
 # Definir um gerador de dados para treinamento
 train_datagen = ImageDataGenerator(rescale=1./255)
 train_generator = train_datagen.flow_from_directory(
-        'dataset/train',
+        'pre_processed_dataset/train',
         target_size=(224, 224),
         batch_size=32,
         class_mode='sparse')  # Não é necessário especificar num_classes
@@ -33,16 +33,16 @@ train_generator = train_datagen.flow_from_directory(
 # Definir um gerador de dados para validação
 validation_datagen = ImageDataGenerator(rescale=1./255)
 validation_generator = validation_datagen.flow_from_directory(
-        'dataset/validation',
+        'pre_processed_dataset/validation',
         target_size=(224, 224),
         batch_size=32,
         class_mode='sparse')  # Não é necessário especificar num_classes
 
 # Definir um callback para salvar o modelo periodicamente durante o treinamento
-checkpoint = ModelCheckpoint('models/pancs_checkpoint.keras', save_best_only=True)
+checkpoint = ModelCheckpoint('modelsv2/pancs_checkpoint.keras', save_best_only=True)
 
 # Treinar o modelo com dados de validação
 model.fit(train_generator, epochs=10, callbacks=[checkpoint], validation_data=validation_generator)
 
 # Salvar o modelo treinado
-model.save('models/pancs.keras')
+model.save('modelsv2/pancs.keras')

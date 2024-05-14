@@ -6,7 +6,7 @@ from keras.api.models import load_model
 classes = {'hibiscus_rosa-sinensis': 0, 'ora-pro-nobis': 1, 'yam': 2}
 
 # Carregar o modelo treinado
-model = load_model('models/pancs.keras')
+model = load_model('modelsv2/pancs.keras')
 
 # Carregar uma nova imagem para teste
 imagem_teste = cv2.imread('inhame2.jpg')
