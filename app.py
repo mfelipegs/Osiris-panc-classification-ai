@@ -42,8 +42,8 @@ def predict():
 
     # Preparar a resposta em formato JSON
     response = {
-        'predicted_class': predicted_class_name,
-        'accuracy_percent': float(probabilities_percent[0][predicted_class])
+        'classe': predicted_class_name,
+        'acuracia': float(probabilities_percent[0][predicted_class])
     }
 
     return jsonify(response)
