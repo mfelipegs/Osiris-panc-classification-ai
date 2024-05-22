@@ -1,34 +1,17 @@
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
-from keras.callbacks import ModelCheckpoint
-import numpy as np
+import os
+from keras.api.applications import VGG16
+from keras.src.legacy.preprocessing.image import ImageDataGenerator
+from keras.api.models import Model
+from keras.api.layers import Dense, Flatten
+from keras.api.callbacks import ModelCheckpoint
 
 # Definir o caminho para o conjunto de dados
-train_data_dir = 'pre_processed_dataset5/train'
-validation_data_dir = 'pre_processed_dataset5/validation'
+train_data_dir = 'pre_processed_dataset16/train'
+validation_data_dir = 'pre_processed_dataset16/validation'
 
 # Definir o tamanho das imagens e o número de classes
 img_width, img_height = 224, 224
 num_classes = 3
-
-# Criar o modelo
-model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(img_width, img_height, 3)),
-    MaxPooling2D((2, 2)),
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D((2, 2)),
-    Conv2D(128, (3, 3), activation='relu'),
-    MaxPooling2D((2, 2)),
-    Flatten(),
-    Dense(128, activation='relu'),
-    Dense(num_classes, activation='softmax')
-])
-
-# Compilar o modelo
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
 
 # Criar geradores de dados para treinamento e validação
 train_datagen = ImageDataGenerator(
@@ -58,10 +41,44 @@ validation_generator = validation_datagen.flow_from_directory(
     class_mode='sparse'
 )
 
-# Definir um callback para salvar o modelo periodicamente durante o treinamento
-checkpoint = ModelCheckpoint('modelsv7/pancs_checkpoint.keras', save_best_only=True)
+# Carregar o modelo base pré-treinado
+base_model = VGG16(weights='imagenet', include_top=False, input_shape=(img_width, img_height, 3))
 
-# Treinar o modelo com dados de validação
+# Adicionar camadas de saída personalizadas
+x = base_model.output
+x = Flatten()(x)
+x = Dense(512, activation='relu')(x)
+predictions = Dense(num_classes, activation='softmax')(x)
+
+# Criar o modelo final
+model = Model(inputs=base_model.input, outputs=predictions)
+
+# Congelar as camadas do modelo base
+for layer in base_model.layers:
+    layer.trainable = False
+
+# Compilar o modelo
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Definir um callback para salvar o modelo periodicamente durante o treinamento
+checkpoint = ModelCheckpoint('modelsv16/pancs_checkpoint.keras', save_best_only=True)
+
+# Treinar o modelo
+model.fit(
+    train_generator,
+    epochs=20,
+    callbacks=[checkpoint],
+    validation_data=validation_generator
+)
+
+# Descongelar algumas camadas do modelo base para ajuste fino
+for layer in base_model.layers[-4:]:
+    layer.trainable = True
+
+# Recompilar o modelo
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Treinar o modelo novamente
 model.fit(
     train_generator,
     epochs=20,
@@ -70,4 +87,4 @@ model.fit(
 )
 
 # Salvar o modelo treinado
-model.save('modelsv7/pancs.keras')
+model.save('modelsv16/pancs.keras')

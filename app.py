@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from keras.models import load_model
+from keras.api.models import load_model
 import numpy as np
 import logging
 from services import image_processor
@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 classes = {'Hibiscus rosa-sinensis': 0, 'Ora-pro-nobis': 1, 'Inhame': 2}
 
 # Carregar o modelo treinado
-model = load_model('modelsv7/pancs.keras')
+model = load_model('modelsv16/pancs.keras')
 
 @app.route('/predict', methods=['POST'])
 def predict():

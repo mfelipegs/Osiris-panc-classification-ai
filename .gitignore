@@ -1,3 +1,6 @@
 dataset/
 osiris-dl/
 models/
+pre_processed_dataset/
+pre_processed_dataset15/
+pre_processed_dataset16/
