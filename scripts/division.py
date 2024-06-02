@@ -3,11 +3,11 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 # Diretório original com todas as imagens
-dataset_dir = 'dataset'
+dataset_dir = '../dataset'
 
 # Diretório para as imagens de treinamento e validação
-train_dir = 'dataset/train'
-val_dir = 'dataset/validation'
+train_dir = '../dataset/train'
+val_dir = '../dataset/validation'
 
 # Criar diretórios para treinamento e validação se ainda não existirem
 os.makedirs(train_dir, exist_ok=True)

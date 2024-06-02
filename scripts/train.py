@@ -6,8 +6,8 @@ from keras.api.layers import Dense, Flatten
 from keras.api.callbacks import ModelCheckpoint
 
 # Definir o caminho para o conjunto de dados
-train_data_dir = 'pre_processed_dataset16/train'
-validation_data_dir = 'pre_processed_dataset16/validation'
+train_data_dir = '../pre_processed_dataset/train'
+validation_data_dir = '../pre_processed_dataset/validation'
 
 # Definir o tamanho das imagens e o número de classes
 img_width, img_height = 224, 224
@@ -61,7 +61,7 @@ for layer in base_model.layers:
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Definir um callback para salvar o modelo periodicamente durante o treinamento
-checkpoint = ModelCheckpoint('modelsv16/pancs_checkpoint.keras', save_best_only=True)
+checkpoint = ModelCheckpoint('../models/pancs_checkpoint.keras', save_best_only=True)
 
 # Treinar o modelo
 model.fit(
@@ -87,4 +87,4 @@ model.fit(
 )
 
 # Salvar o modelo treinado
-model.save('modelsv16/pancs.keras')
+model.save('../models/pancs.keras')

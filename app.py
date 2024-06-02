@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 classes = {'Hibiscus rosa-sinensis': 0, 'Ora-pro-nobis': 1, 'Inhame': 2}
 
 # Carregar o modelo treinado
-model = load_model('modelsv16/pancs.keras')
+model = load_model('models/pancs.keras')
 
 @app.route('/predict', methods=['POST'])
 def predict():
