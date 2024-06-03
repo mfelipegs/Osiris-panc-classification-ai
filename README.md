@@ -4,6 +4,7 @@
 
 <div align="center">
    
+   ![GitHub](https://img.shields.io/github/license/mfelipegs/Osiris-panc-classification-ai)
    ![GitHub language count](https://img.shields.io/github/languages/count/mfelipegs/Osiris-panc-classification-ai)
    ![GitHub last commit](https://img.shields.io/github/last-commit/mfelipegs/Osiris-panc-classification-ai)
    ![GitHub Release](https://img.shields.io/github/v/release/mfelipegs/Osiris-panc-classification-ai)
