@@ -76,7 +76,7 @@ Certifique-se de que a porta 5000 está disponível para a aplicação.
 
 **Responses**
 
-- **200** - Retorna a predição da imagem
+- **200** - Retorna a predição (classificação) da imagem
 
 - `classe`: Classe predita da imagem (Hibiscus Rosa-Sinensis, Ora-pro-nobis ou Inhame)
 - `acuracia`: Acurácia da predição em porcentagem (valor flutuante)
