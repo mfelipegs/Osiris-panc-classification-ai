@@ -8,6 +8,7 @@
    ![GitHub last commit](https://img.shields.io/github/last-commit/mfelipegs/Osiris-panc-classification-ai)
    ![GitHub Release](https://img.shields.io/github/v/release/mfelipegs/Osiris-panc-classification-ai)
    ![Python Tests](https://github.com/mfelipegs/Osiris-panc-classification-ai/actions/workflows/tests.yml/badge.svg?branch=feature/unit-tests)
+   [![Codecov](https://codecov.io/gh/mfelipegs/Osiris-panc-classification-ai/branch/main/graph/badge.svg?token=TOKEN)](https://codecov.io/gh/username/repo-name)
 
 </div>
 
