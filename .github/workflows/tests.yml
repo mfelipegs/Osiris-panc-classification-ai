@@ -1,0 +1,47 @@
+name: Python Tests
+
+on:
+  pull_request:
+    branches:
+      - feature/unit-tests
+      - main
+
+  push:
+    branches:
+      - feature/unit-tests
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Storing the Git LFS cache
+      - name: Cache Git LFS files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/git-lfs
+            models
+          key: ${{ runner.os }}-lfs-${{ hashFiles('models/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-lfs-
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r tests/requirements-tests.txt
+
+      - name: Run tests
+        run: |
+          pytest --cov=. --cov-report=term-missing --cov-config=.coveragerc --disable-warnings

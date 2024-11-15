@@ -1,2 +1,17 @@
+# image/dataset folders
 dataset/
 pre_processed_dataset/
+
+# cache py files
+__pycache__/
+*.pyc
+
+# virtual env
+osirisai-test/
+
+# coverage files
+.coverage
+.coverage.*
+
+# temporary files
+*.pytest_cache/
