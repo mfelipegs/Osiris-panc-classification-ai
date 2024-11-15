@@ -6,6 +6,10 @@ on:
       - feature/unit-tests
       - main
 
+  push:
+    branches:
+      - feature/unit-tests
+
 jobs:
   test:
     runs-on: ubuntu-latest
