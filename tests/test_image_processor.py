@@ -32,9 +32,6 @@ def test_process_image_invalid_url():
         result = process_image('http://example.com/invalid.jpg')
         assert result == {'error': 'Failed to download image'}
 
-from unittest.mock import patch, MagicMock
-from services.image_processor import process_image
-
 def test_process_image_non_rgb_image():
     with patch('services.image_processor.requests.get') as mock_get:
         # Mockar a resposta da requisição
