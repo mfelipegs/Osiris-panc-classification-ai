@@ -5,9 +5,6 @@ on:
     branches:
       - feature/unit-tests
       - main
-  push:
-    branches:
-      - feature/unit-tests
 
 jobs:
   test:
@@ -18,6 +15,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           lfs: true
+
+      # Storing the Git LFS cache
+      - name: Cache Git LFS files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/git-lfs
+            models
+          key: ${{ runner.os }}-lfs-${{ hashFiles('models/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-lfs-
 
       - name: Set up Python
         uses: actions/setup-python@v2
