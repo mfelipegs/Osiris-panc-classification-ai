@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - feature/unit-tests
+      - main
+  push:
+    branches:
+      - feature/unit-tests
 
 jobs:
   test:
