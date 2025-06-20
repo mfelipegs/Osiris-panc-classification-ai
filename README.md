@@ -56,7 +56,7 @@ python app.py
 
 &nbsp;
 
-Versão suportada oficialmente do Python: 3.10.11
+Versão suportada oficialmente do Python: 3.10.12
 
 &nbsp;
 
