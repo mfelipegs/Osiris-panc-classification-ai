@@ -56,6 +56,10 @@ python app.py
 
 &nbsp;
 
+Versão suportada oficialmente do Python: 3.10.11
+
+&nbsp;
+
 Certifique-se de que a porta 5000 está disponível para a aplicação.
 
 ## Endpoints
